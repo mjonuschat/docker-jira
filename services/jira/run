@@ -1,0 +1,4 @@
+#!/bin/sh
+exec 2>&1
+cd /srv/atlassian/jira
+exec /sbin/setuser jira bin/catalina.sh run

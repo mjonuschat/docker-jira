@@ -35,9 +35,9 @@ apt-get install -y --force-yes \
 mkdir -p /srv/atlassian
 mkdir -p /srv/application-data/jira
 
-curl --silent --retry 3 http://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.3.9.tar.gz | tar -xz -C /srv/atlassian
+curl --silent --retry 3 http://downloads.atlassian.com/software/jira/downloads/atlassian-jira-6.4.2.tar.gz | tar -xz -C /srv/atlassian
 
-ln -nsf /srv/atlassian/atlassian-jira-6.3.9-standalone /srv/atlassian/jira
+ln -nsf /srv/atlassian/atlassian-jira-6.4.2-standalone /srv/atlassian/jira
 
 cat >/srv/atlassian/jira/atlassian-jira/WEB-INF/classes/jira-application.properties <<-CONFIG
 # Do not modify this file unless instructed. It is here to store the location of the JIRA home directory only and is typically written to by the installer.
@@ -46,7 +46,7 @@ CONFIG
 
 sed -i -e 's/<Connector port="8080"/<Connector port="5000"/' /srv/atlassian/jira/conf/server.xml
 
-chown -R jira:jira /srv/atlassian/atlassian-jira-6.3.9-standalone /srv/atlassian/jira /srv/application-data/jira
+chown -R jira:jira /srv/atlassian/atlassian-jira-6.4.2-standalone /srv/atlassian/jira /srv/application-data/jira
 
 cd /
 rm -rf /var/cache/apt/archives/*.deb
