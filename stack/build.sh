@@ -8,7 +8,7 @@ deb http://archive.ubuntu.com/ubuntu trusty-updates main
 deb http://archive.ubuntu.com/ubuntu trusty universe
 EOF
 
-JIRA_VERSION=6.4.8
+JIRA_VERSION=6.4.11
 
 apt-get update
 apt-get install -y --force-yes \
