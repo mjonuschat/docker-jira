@@ -2,17 +2,17 @@
 set -xeo pipefail
 
 cat > /etc/apt/sources.list <<EOF
-deb http://archive.ubuntu.com/ubuntu trusty main
-deb http://archive.ubuntu.com/ubuntu trusty-security main
-deb http://archive.ubuntu.com/ubuntu trusty-updates main
-deb http://archive.ubuntu.com/ubuntu trusty universe
+deb http://de.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
 EOF
 
-JIRA_VERSION=7.0.10
+JIRA_VERSION=${JIRA_VERSION:-7.4.0}
 
 # Install dependencies
 apt-get update
-apt-get install -y --force-yes \
+apt-get install -y --no-install-recommends \
     curl \
     language-pack-de \
     language-pack-en \
@@ -24,7 +24,7 @@ apt-get install -y --force-yes \
 curl --silent \
     --retry 3 \
     --output /tmp/atlassian-jira-software-${JIRA_VERSION}-jira-${JIRA_VERSION}-x64.bin \
-    https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_VERSION}-jira-${JIRA_VERSION}-x64.bin
+    https://downloads.atlassian.com/software/jira/downloads/atlassian-jira-software-${JIRA_VERSION}-x64.bin
 
 # Create a random user
 /usr/sbin/addgroup --quiet --gid 1000 jira
@@ -69,6 +69,9 @@ cat >/srv/atlassian/jira/atlassian-jira/WEB-INF/classes/jira-application.propert
 jira.home = /srv/application-data/jira/
 CONFIG
 
+# Perform finalization of setup
+/tmp/build/finalize.sh
+
 # Fix permissions
 chown -R jira:jira /srv/atlassian/jira /srv/application-data/jira
 
@@ -85,9 +88,6 @@ function pruned_find() {
 
 pruned_find -perm /u+s | xargs -r chmod u-s
 pruned_find -perm /g+s | xargs -r chmod g-s
-
-# remove non-root ownership of files
-chown root:root /var/lib/libuuid
 
 echo -e "\nSuccess!"
 exit 0

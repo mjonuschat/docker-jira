@@ -1,8 +1,8 @@
-FROM phusion/baseimage:0.9.18
+FROM yabawock/baseimage:1.0.1
 MAINTAINER Morton Jonuschat <m.jonuschat@mojocode.de>
 
-ADD ./stack/build.sh /tmp/build.sh
+ADD ./image/ /tmp/build/
 ADD ./services/jira /etc/service/jira
-RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive /tmp/build.sh
+RUN LC_ALL=C DEBIAN_FRONTEND=noninteractive /tmp/build/build.sh
 
-EXPOSE 5000
+EXPOSE 8080

@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  app:
+    build: .
+    links:
+      - database:postgresql
+    volumes:
+      - /srv/applications/jira/application:/srv/application-data/jira
+    networks:
+      - loadbalancer
+      - default
+    restart: always
+
+  database:
+    image: postgres:9.6
+    environment:
+      - POSTGRES_USER=jira
+      - POSTGRES_PASSWORD=i95nkLHBB9QtVCBpjmSqa5mgR6iHmtzu
+    volumes:
+      - /srv/applications/jira/postgresql:/var/lib/postgresql/data
+    networks:
+      - default
+    restart: always
+
+networks:
+  loadbalancer:
+    external:
+      name: nginx_loadbalancer
