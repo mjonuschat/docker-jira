@@ -8,7 +8,7 @@ deb http://de.archive.ubuntu.com/ubuntu xenial-security main restricted universe
 deb http://de.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
 EOF
 
-JIRA_VERSION=${JIRA_VERSION:-7.4.0}
+JIRA_VERSION=${JIRA_VERSION:-7.5.2}
 
 # Install dependencies
 apt-get update

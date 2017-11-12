@@ -17,6 +17,7 @@ services:
     environment:
       - POSTGRES_USER=jira
       - POSTGRES_PASSWORD=i95nkLHBB9QtVCBpjmSqa5mgR6iHmtzu
+      - POSTGRES_INITDB_ARGS=--locale=C
     volumes:
       - /srv/applications/jira/postgresql:/var/lib/postgresql/data
     networks:
