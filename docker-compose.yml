@@ -11,6 +11,20 @@ services:
       - loadbalancer
       - default
     restart: always
+    labels:
+      traefik.domain: mojocode.de
+      traefik.enable: true
+      traefik.port: 8080
+      traefik.docker.network: traefik_loadbalancer
+      traefik.frontend.passHostHeader: true
+      traefik.frontend.rule: Host:jira.mojocode.de
+      traefik.frontend.headers.SSLRedirect: true
+      traefik.frontend.headers.STSSeconds: 315360000
+      traefik.frontend.headers.STSIncludeSubdomains: true
+      traefik.frontend.headers.STSPreload: true
+      traefik.frontend.headers.frameDeny: true
+      traefik.frontend.headers.contentTypeNosniff: true
+      traefik.frontend.headers.browserXSSFilter: true
 
   database:
     image: postgres:9.6
@@ -27,4 +41,4 @@ services:
 networks:
   loadbalancer:
     external:
-      name: nginx_loadbalancer
+      name: traefik_loadbalancer
