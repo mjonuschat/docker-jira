@@ -8,7 +8,7 @@ deb http://de.archive.ubuntu.com/ubuntu bionic-security main restricted universe
 deb http://de.archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse
 EOF
 
-JIRA_VERSION=${JIRA_VERSION:-7.5.2}
+JIRA_VERSION=${JIRA_VERSION:-7.12.3}
 
 # Install dependencies
 apt-get update
