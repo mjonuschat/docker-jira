@@ -1,4 +1,4 @@
-FROM yabawock/baseimage:1.0.1
+FROM yabawock/baseimage:2.0.0
 MAINTAINER Morton Jonuschat <m.jonuschat@mojocode.de>
 
 ADD ./image/ /tmp/build/

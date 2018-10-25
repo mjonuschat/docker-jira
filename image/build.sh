@@ -2,16 +2,17 @@
 set -xeo pipefail
 
 cat > /etc/apt/sources.list <<EOF
-deb http://de.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
-deb http://de.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
-deb http://de.archive.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
-deb http://de.archive.ubuntu.com/ubuntu xenial-backports main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu bionic-security main restricted universe multiverse
+deb http://de.archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse
 EOF
 
 JIRA_VERSION=${JIRA_VERSION:-7.5.2}
 
 # Install dependencies
 apt-get update
+apt-get dist-upgrade -y --no-install-recommends -o Dpkg::Options::="--force-confold"
 apt-get install -y --no-install-recommends \
     curl \
     language-pack-de \
